@@ -11,6 +11,9 @@ The script below assumes all machines have Ubuntu 20.04. For other Linux-based o
 
 If not yet installed, install docker by performing the instructions [here](https://docs.docker.com/engine/install/ubuntu/){target=_blank}. Specifically, you can use a convenience script provided in the document:
 ``` shell
+# cleanup
+sudo apt purge docker-ce contaienrd
+
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
@@ -50,6 +53,12 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 sudo apt-get update
+
+# cleanup
+sudo mv /etc/kubernetes /etc/kubernetes.bak
+sudo apt purge -y kubelet kubeadm kubectl
+
+# fresh install
 sudo apt-get install -y kubelet=1.23.5-00 kubeadm=1.23.5-00 kubectl=1.23.5-00
 ```
 
